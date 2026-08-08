@@ -1,0 +1,26 @@
+name: My App CI-CD Pipeline
+
+on:
+  push:
+    branches: [ main ] # Run this only when code is merged into main
+
+jobs:
+  # --- THE CI STAGE ---
+  test-app:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: npm install
+      - name: Run Tests
+        run: npm test # If tests fail, the workflow stops here!
+
+  # --- THE CD STAGE ---
+  deploy-app:
+    runs-on: ubuntu-latest
+    needs: test-app # Wait! Do not run this unless 'test-app' passes successfully!
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to Hosting Server
+        run: echo "Uploading code to production server..."
+        # In real life, you would use a tool here to sync with AWS, Netlify, Vercel, etc.
