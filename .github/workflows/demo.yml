@@ -1,0 +1,19 @@
+name: GitHub Actions Demo
+
+# Triggers define when the workflow will run
+on:
+  push:
+    branches: [ main ] # Runs automatically when you push to the main branch
+  workflow_dispatch:   # Adds a manual "Run workflow" button in the GitHub UI
+
+# Jobs define the actual automation steps
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Run a one-line script
+        run: echo "The workflow is successfully showing up in the Actions tab!"
