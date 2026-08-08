@@ -1,0 +1,15 @@
+name: Code Cleaner Check
+
+on: 
+  pull_request: # 1. TRIGGER: Wake up when a PR is opened
+
+jobs:
+  run-linter:
+    runs-on: ubuntu-latest # 2. RUNNER: Give me a fresh Ubuntu Linux machine
+    
+    steps: # 3. STEPS: Do these things in order
+      - name: Copy my code to the robot's machine
+        uses: actions/checkout@v4 # Pre-made GitHub tool to copy files
+
+      - name: Check formatting
+        run: npm run lint # Runs your local project's formatting command
